@@ -41,7 +41,7 @@ pipeline {
       steps {
         dir ( 'docs' ) {
           container('mlt') {
-            sh 'ffmpeg -f concat -i join.txt -c copy output.mov'
+            sh 'ffmpeg -f concat -filter_complex xfade=transition=slideleft:duration=5:offset=0 -i join.txt -c copy output.mov'
           }
         }
       }
