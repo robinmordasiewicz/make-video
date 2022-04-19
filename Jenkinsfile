@@ -50,13 +50,15 @@ pipeline {
       steps {
         sh 'git config user.email "robin@mordasiewicz.com"'
         sh 'git config user.name "Robin Mordasiewicz"'
-        // sh 'git add -u'
-        // sh 'git diff --quiet && git diff --staged --quiet || git commit -m "`cat VERSION`"'
-        sh 'git add . && git diff --staged --quiet || git commit -m "new movie"'
-        withCredentials([gitUsernamePassword(credentialsId: 'github-pat', gitToolName: 'git')]) {
-          // sh 'git diff --quiet && git diff --staged --quiet || git push origin HEAD:main'
-          // sh 'git diff --quiet HEAD || git push origin HEAD:main'
-          sh 'git push origin HEAD:main'
+        dir ( 'docs' ) {
+          // sh 'git add -u'
+          // sh 'git diff --quiet && git diff --staged --quiet || git commit -m "`cat VERSION`"'
+          sh 'git add . && git diff --staged --quiet || git commit -m "new movie"'
+          withCredentials([gitUsernamePassword(credentialsId: 'github-pat', gitToolName: 'git')]) {
+            // sh 'git diff --quiet && git diff --staged --quiet || git push origin HEAD:main'
+            // sh 'git diff --quiet HEAD || git push origin HEAD:main'
+            sh 'git push origin HEAD:main'
+          }
         }
       }
     }
