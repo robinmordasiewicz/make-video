@@ -35,19 +35,6 @@ pipeline {
         checkout scm
       }
     }
-    stage('mkdir tmp') {
-      steps {
-        sh 'mkdir tmp'
-      }
-    }
-    stage('checkout docs') {
-      steps {
-        sh 'mkdir -p tmp/theme'
-        dir ( 'tmp/theme' ) {
-          git branch: 'main', url: 'https://github.com/robinmordasiewicz/sphinx-theme.git'
-        }
-      }
-    }
     stage('checkout docs') {
       steps {
         sh 'mkdir -p docs'
