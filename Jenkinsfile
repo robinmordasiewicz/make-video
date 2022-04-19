@@ -24,12 +24,20 @@ pipeline {
   }
   stages {
     stage('INIT') {
+      when {
+        beforeAgent true
+        changeset "Jenkinsfile"
+      }
       steps {
         cleanWs()
         checkout scm
       }
     }
     stage('checkout docs') {
+      when {
+        beforeAgent true
+        changeset "Jenkinsfile"
+      }
       steps {
         sh 'mkdir -p docs'
         dir ( 'docs' ) {
@@ -38,6 +46,10 @@ pipeline {
       }
     }
     stage('make video') {
+      when {
+        beforeAgent true
+        changeset "Jenkinsfile"
+      }
       steps {
         dir ( 'docs' ) {
           container('mlt') {
@@ -49,6 +61,10 @@ pipeline {
       }
     }
     stage('Commit new VERSION') {
+      when {
+        beforeAgent true
+        changeset "Jenkinsfile"
+      }
       steps {
         dir ( 'docs' ) {
           sh 'git config user.email "robin@mordasiewicz.com"'
