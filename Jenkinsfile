@@ -48,9 +48,9 @@ pipeline {
     }
     stage('Commit new VERSION') {
       steps {
-        sh 'git config user.email "robin@mordasiewicz.com"'
-        sh 'git config user.name "Robin Mordasiewicz"'
         dir ( 'docs' ) {
+          sh 'git config user.email "robin@mordasiewicz.com"'
+          sh 'git config user.name "Robin Mordasiewicz"'
           // sh 'git add -u'
           // sh 'git diff --quiet && git diff --staged --quiet || git commit -m "`cat VERSION`"'
           sh 'git add . && git diff --staged --quiet || git commit -m "new movie"'
