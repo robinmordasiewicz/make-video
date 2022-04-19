@@ -40,10 +40,28 @@ pipeline {
         sh 'mkdir tmp'
       }
     }
+    stage('checkout docs') {
+      steps {
+        sh 'mkdir -p tmp/theme'
+        dir ( 'tmp/theme' ) {
+          git branch: 'main', url: 'https://github.com/robinmordasiewicz/sphinx-theme.git'
+        }
+      }
+    }
+    stage('checkout docs') {
+      steps {
+        sh 'mkdir -p docs'
+        dir ( 'docs' ) {
+          git branch: 'main', url: 'https://github.com/robinmordasiewicz/f5-cnf-lab.git'
+        }
+      }
+    }
     stage('make video') {
       steps {
-        container('mlt') {
-          sh 'ffmpeg -f concat -i join.txt -c copy output.mp4'
+        dir ( 'docs' ) {
+          container('mlt') {
+            sh 'ffmpeg -f concat -i join.txt -c copy output.mov'
+          }
         }
       }
     }
