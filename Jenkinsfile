@@ -13,12 +13,6 @@ pipeline {
         kind: Pod
         spec:
           containers:
-          - name: ubuntu
-            image: robinhoodis/ubuntu:latest
-            imagePullPolicy: Always
-            command:
-            - cat
-            tty: true
           - name: mlt
             image: robinhoodis/mlt:latest
             imagePullPolicy: Always
