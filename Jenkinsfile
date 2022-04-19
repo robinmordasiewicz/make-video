@@ -55,7 +55,7 @@ pipeline {
           container('mlt') {
             // sh 'ffmpeg -f concat -filter_complex xfade=transition=slideleft:duration=5:offset=0 -i join.txt -c copy output.mov'
             // sh 'ffmpeg -i join.txt -filter_complex "[0:v]setpts=PTS-STARTPTS[v0];[1:v]setpts=PTS-STARTPTS+4/TB,format=yuva444p,fade=st=4:d=1:t=in:alpha=1[v1];[v0][v1]overlay,format=yuv420p[v];[0:a]asetpts=PTS-STARTPTS[a0];[1:a]asetpts=PTS-STARTPTS[a1];[a0][a1]acrossfade=d=1[a]" -map "[v]" -map "[a]" output.mov'
-            sh 'ffmpeg -i clip1.mov -i clip2.mov -i clip3.mov -filter_complex "xfade=transition=fade:offset=60:duration=1" out.mov'
+            sh 'ffmpeg -i clip1.mov -i clip2.mov -i clip3.mov -pix_fmt yuv420p -filter_complex "xfade=transition=fade:offset=60:duration=1" out.mov'
           }
         }
       }
